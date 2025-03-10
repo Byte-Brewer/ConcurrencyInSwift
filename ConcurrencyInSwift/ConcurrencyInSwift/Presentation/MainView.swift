@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @StateObject private var viewModel: MainViewModel = .init(service: TopicService())
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if viewModel.isLoading {
+                ProgressView()
+            } else {
+                ScrollView {
+                    ForEach(viewModel.arrayOfTopic, id: \.id) { item in
+                        VStack {
+                            Text(item.title)
+                            Text(item.text)
+                        }
+                        .padding()
+                    }
+                }
+            }
         }
-        .padding()
+        .onAppear {
+            viewModel.onAppear()
+        }
+        .refreshable {
+            viewModel.onAppear()
+        }
     }
 }
 
