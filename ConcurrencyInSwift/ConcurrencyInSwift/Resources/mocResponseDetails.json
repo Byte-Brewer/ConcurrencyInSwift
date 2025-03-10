@@ -1,0 +1,42 @@
+[
+    {
+        "id": "topic_1",
+        "published_at": 1678901234,
+        "description": "Best practices for building SwiftUI apps, including optimizing performance, structuring views efficiently, managing state, and ensuring smooth animations for a better user experience."
+    },
+    {
+        "id": "topic_2",
+        "published_at": 1678902234,
+        "description": "An in-depth introduction to the Combine framework for reactive programming in Swift, covering how to work with publishers, subscribers, operators, and handling asynchronous data streams efficiently."
+    },
+    {
+        "id": "topic_3",
+        "published_at": 123123123,
+        "description": "Understanding concurrency in Swift, including async/await, Task, actors, Grand Central Dispatch (GCD), and best practices for writing thread-safe and high-performance asynchronous code."
+    },
+    {
+        "id": "topic_4",
+        "published_at": 1678903234,
+        "description": "Exploring different data persistence techniques in Swift, from lightweight storage using UserDefaults and Codable to more complex solutions like Core Data and the new SwiftData framework."
+    },
+    {
+        "id": "topic_5",
+        "published_at": 1678904234,
+        "description": "A deep dive into networking with URLSession, covering best practices for handling REST API calls, parsing JSON responses, handling authentication, and ensuring network reliability in Swift applications."
+    },
+    {
+        "id": "topic_6",
+        "published_at": 1678905234,
+        "description": "Implementing dependency injection in Swift to create modular, testable, and maintainable codebases, using techniques such as protocol-oriented programming and dependency container frameworks."
+    },
+    {
+        "id": "topic_7",
+        "published_at": 1678906234,
+        "description": "Mastering Core Data in SwiftUI, including setting up the Core Data stack, working with managed objects, handling migrations, and integrating Core Data seamlessly with SwiftUI views."
+    },
+    {
+        "id": "topic_8",
+        "published_at": 1678907234,
+        "description": "A complete guide to unit testing in Swift, covering XCTest, test-driven development (TDD), mocking dependencies, UI testing, and strategies for writing robust, maintainable tests."
+    }
+]

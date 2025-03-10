@@ -1,0 +1,36 @@
+
+[
+    {
+        "id": "topic_1",
+        "title": "SwiftUI Best Practices"
+    },
+    {
+        "id": "topic_2",
+        "title": "Combine Framework"
+    },
+    {
+        "id": "topic_3",
+        "title": "Concurrency in Swift"
+    },
+    {
+        "id": "topic_4",
+        "title": "Swift Data Persistence"
+    },
+    {
+        "id": "topic_5",
+        "title": "Networking with URLSession"
+    },
+    {
+        "id": "topic_6",
+        "title": "Dependency Injection in Swift"
+    },
+    {
+        "id": "topic_7",
+        "title": "Core Data in SwiftUI"
+    },
+    {
+        "id": "topic_8",
+        "title": "Unit Testing in Swift"
+    }
+]
+
