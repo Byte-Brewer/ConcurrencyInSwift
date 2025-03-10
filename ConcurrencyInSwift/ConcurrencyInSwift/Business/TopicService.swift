@@ -7,17 +7,6 @@
 
 import Foundation
 
-struct TopicData: Decodable {
-    let id: String
-    let title: String
-}
-
-struct Details: Decodable {
-    let id: String
-    let published_at: Int
-    let description: String
-}
-
 protocol TopicServiceProtocol {
     func getTopics() async throws -> [Topic]
 }
@@ -32,8 +21,7 @@ final class TopicService: TopicServiceProtocol {
     func getTopics() async throws -> [Topic] {
         try await Task.sleep(for: .seconds(1.0))
         
-        let data = try HelperMocClass.getData(from: .allItems)
-        let arrayOfTopics = try JSONDecoder().decode([TopicData].self, from: data)
+        let arrayOfTopics: [TopicData] = try HelperMocClass.getData(from: .allItems)
         
         var results: [Topic] = []
         
@@ -49,39 +37,17 @@ final class TopicService: TopicServiceProtocol {
             }
         }
         return results
-        
     }
     
     private func getTopicDetails(item: TopicData) async throws -> Topic {
         try await Task.sleep(for: .seconds(([5,6,7,8,9,10,11].randomElement() ?? 5)))
         
-        let data = try HelperMocClass.getData(from: .detailItems)
-        
-        let arrayOfDescriptions = try JSONDecoder().decode([Details].self, from: data)
+        let arrayOfDescriptions: [DetailsData] = try HelperMocClass.getData(from: .detailItems)
         
         guard let descriptions = arrayOfDescriptions.first(where: { $0.id == item.id }) else {
             throw TopicServiceError.wrongTopicId
         }
         
         return Topic(title: item.title, id: item.id, text: descriptions.description)
-    }
-    
-    
-}
-
-final class HelperMocClass {
-    enum MocFileName: String {
-        case allItems = "mocResponse"
-        case detailItems = "mocResponseDetails"
-    }
-    
-    static func getData(from name: MocFileName) throws -> Data {
-        let fileName: String = name.rawValue
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-            fatalError("Could not find \(fileName).json")
-        }
-        
-        let data = try Data(contentsOf: url)
-        return data
     }
 }
