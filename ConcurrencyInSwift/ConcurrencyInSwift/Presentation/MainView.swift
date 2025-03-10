@@ -16,13 +16,11 @@ struct MainView: View {
             if viewModel.isLoading {
                 ProgressView()
             } else {
-                ScrollView {
+                List {
                     ForEach(viewModel.arrayOfTopic, id: \.id) { item in
-                        VStack {
-                            Text(item.title)
-                            Text(item.text)
-                        }
-                        .padding()
+                        ListItem(title: item.title,
+                                 descriptions: item.text,
+                                 time: item.id)
                     }
                 }
             }
@@ -33,9 +31,23 @@ struct MainView: View {
         .refreshable {
             viewModel.onAppear()
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text("Concurrency In Swift")
+                        .font(.headline)
+                    Text(viewModel.isLoading ? "Loading... \(String(format: "%.2f", viewModel.elapsedTime))s" : "Fetch complete in \(String(format: "%.2f", viewModel.elapsedTime))s")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    MainView()
+    NavigationView {
+        MainView()
+    }
 }
