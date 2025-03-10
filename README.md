@@ -39,21 +39,21 @@ The goal is to build a SwiftUI/Compose-based iOS/Android application that displa
     },
     {
         "id": "topic_3",
-          "title": "Concurrency in Swift"
+        "title": "Concurrency in Swift"
     }
 ]
 ```
 
-###. 2. **Topic Details**
+### 2. **Topic Details**
 - **Endpoint:** `GET /api/topics/{id}`
 - **Description:** Fetches a specific topic details.
 
 #### Example Response:
 ```json
 {
-		"id": "topic_3",
+	"id": "topic_3",
     "published_at": 123123123,
-		"description": "Concurrency in Swift"
+	"description": "Concurrency in Swift"
 }
 ```
 
