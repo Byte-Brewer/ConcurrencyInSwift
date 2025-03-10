@@ -52,7 +52,7 @@ The goal is to build a SwiftUI/Compose-based iOS/Android application that displa
 ```json
 {
     "id": "topic_3",
-    "published_at": "1973-11-29 21:32:03",
+    "published_at": 123123123,
     "description": "Concurrency in Swift"
 }
 ```
