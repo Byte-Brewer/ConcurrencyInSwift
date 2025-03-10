@@ -40,7 +40,7 @@ final class TopicService: TopicServiceProtocol {
     }
     
     private func getTopicDetails(item: TopicData) async throws -> Topic {
-        try await Task.sleep(for: .seconds(([5,6,7,8,9,10,11].randomElement() ?? 5)))
+        try await Task.sleep(for: .seconds(([5,6].randomElement() ?? 5)))
         
         let arrayOfDescriptions: [DetailsData] = try HelperMocClass.getData(from: .detailItems)
         
@@ -48,6 +48,8 @@ final class TopicService: TopicServiceProtocol {
             throw TopicServiceError.wrongTopicId
         }
         
-        return Topic(title: item.title, id: item.id, text: descriptions.description)
+        return Topic(title: item.title,
+                     time: descriptions.publishedAt.formatted(date: .abbreviated, time: .standard),
+                     text: descriptions.description)
     }
 }

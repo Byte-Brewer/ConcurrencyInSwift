@@ -6,9 +6,10 @@
 //
 import Foundation
 
-struct Topic {
+struct Topic: Identifiable {
+    let id = UUID()
     let title: String
-    let id: String
+    let time: String
     let text: String
 }
 
@@ -16,9 +17,10 @@ final class MainViewModel: ObservableObject {
     
     @Published var arrayOfTopic: [Topic] = []
     @Published var isLoading: Bool = false
-    @Published var eroro: String = ""
+    @Published var errorMessage: String = ""
     @Published var elapsedTime: Double = 0.0
     @Published var timer: Timer?
+    @Published var showingAlert: Bool = false
     
     private let service: TopicServiceProtocol
     
@@ -42,9 +44,12 @@ final class MainViewModel: ObservableObject {
                     stopTimer()
                 }
             } catch {
-                stopTimer()
-                isLoading = false
-                eroro = error.localizedDescription
+                await MainActor.run {
+                    isLoading = false
+                    errorMessage = error.localizedDescription
+                    showingAlert = true
+                    stopTimer()
+                }
             }
         }
     }
@@ -53,8 +58,8 @@ final class MainViewModel: ObservableObject {
         elapsedTime = 0.0
         timer?.invalidate() // Stop any existing timer
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [self] _ in
-            self.elapsedTime += 0.1
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            self?.elapsedTime += 0.1
         }
     }
     

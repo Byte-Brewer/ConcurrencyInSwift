@@ -16,13 +16,7 @@ struct MainView: View {
             if viewModel.isLoading {
                 ProgressView()
             } else {
-                List {
-                    ForEach(viewModel.arrayOfTopic, id: \.id) { item in
-                        ListItem(title: item.title,
-                                 descriptions: item.text,
-                                 time: item.id)
-                    }
-                }
+                mainView
             }
         }
         .onAppear {
@@ -30,6 +24,9 @@ struct MainView: View {
         }
         .refreshable {
             viewModel.onAppear()
+        }
+        .alert(viewModel.errorMessage, isPresented: $viewModel.showingAlert) {
+            Button("OK", role: .cancel) { }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -41,6 +38,16 @@ struct MainView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
+            }
+        }
+    }
+    
+    private var mainView: some View {
+        List {
+            ForEach(viewModel.arrayOfTopic, id: \.id) { item in
+                ListItem(title: item.title,
+                         descriptions: item.text,
+                         time: item.time)
             }
         }
     }
