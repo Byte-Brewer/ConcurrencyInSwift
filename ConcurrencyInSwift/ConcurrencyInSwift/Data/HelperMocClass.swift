@@ -7,6 +7,17 @@
 
 import Foundation
 
+enum HelperMocClassError: Error, LocalizedError {
+    case pathNotFound(String)
+    
+    var errorDescription: String? {
+        switch self {
+        case .pathNotFound(let message):
+            return message
+        }
+    }
+}
+
 final class HelperMocClass {
     
     enum MocFileName: String {
@@ -17,7 +28,7 @@ final class HelperMocClass {
     static func getData<T: Decodable>(from name: MocFileName) throws -> T {
         let fileName: String = name.rawValue
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-            fatalError("Could not find \(fileName).json")
+            throw HelperMocClassError.pathNotFound("Could not find \(fileName).json")
         }
         
         let data = try Data(contentsOf: url)

@@ -11,9 +11,18 @@ protocol TopicServiceProtocol {
     func getTopics() async throws -> [Topic]
 }
 
-enum TopicServiceError: Error {
+enum TopicServiceError: Error, LocalizedError {
     case wrongMocPath
     case wrongTopicId
+    
+    var errorDescription: String? {
+        switch self {
+        case .wrongMocPath:
+            return "can't get list off topics"
+        case .wrongTopicId:
+            return "don't have descriptions by topic id"
+        }
+    }
 }
 
 final class TopicService: TopicServiceProtocol {
